@@ -2,6 +2,7 @@ from time import sleep
 
 import allure
 
+from TaskTwo.Pages import Pages
 from TaskTwo.Pages.Pages import SearchHelper, ItemOneHelper, ItemTwoHelper, BasketHelper
 
 
@@ -26,14 +27,17 @@ def test_items(set_up):
     item_one.getItemOne()
     item_one.addToCard()
 
-    main_page.goSearching()
-    main_page.enterQuery("BJURSTA")
-    main_page.clickSearchButton()
+    if Pages.ItemsPageLocators.closeModal == True:
+        item_one.closeModal()
+    else:
+        main_page.goSearching()
+        main_page.enterQuery("BJURSTA")
+        main_page.clickSearchButton()
 
-    item_two.getItemTwo()
-    item_two.addToCard()
-    custom_wait()
+        item_two.getItemTwo()
+        item_two.addToCard()
+        custom_wait()
 
-    custom_wait()
-    basket.goToBusket()
-    basket.verifyItemsInBusket()
+        custom_wait()
+        basket.goToBusket()
+        basket.verifyItemsInBusket()
