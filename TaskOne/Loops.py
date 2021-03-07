@@ -1,19 +1,20 @@
 class Initial:
     def __int__(self, number):
-        self.number = 100
+        self.number = number
 
 
 class Counting(Initial):
-    initial = Initial()
-    for initial in range(100, 0, -1):
+    init = Initial()
+    init.number = 100
+    for init.number in range(init.number, 0, -1):
 
-        if initial % 15 == 0:
+        if init.number % 15 == 0:
             print("Agile", "Software", "Testing")
-        elif initial % 5 == 0:
+        elif init.number % 5 == 0:
             print("Agile")
-        elif initial % 3 == 0:
+        elif init.number % 3 == 0:
             print("Software")
         else:
-            print(initial)
+            print(init.number)
 
 
