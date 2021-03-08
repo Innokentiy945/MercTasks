@@ -4,7 +4,8 @@
 1) install python3
 2) pip install pytest/selenium
 3) pip install allure-pytest
-4) download & install webdriver to C:/
+4) pip install PyHamcrest   
+5) download & install webdriver to C:/
 
 **Run tests:**
 `python -m pytest TaskTwo/Tests/Tests.py --alluredir=TaskTwo/Results `

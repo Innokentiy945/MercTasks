@@ -1,13 +1,8 @@
-from time import sleep
-
 import allure
+from hamcrest import *
 
 from TaskTwo.Pages import Pages
 from TaskTwo.Pages.Pages import SearchHelper, ItemOneHelper, ItemTwoHelper, BasketHelper
-
-
-def custom_wait():
-    sleep(10)
 
 
 @allure.story('Testing e-shop')
@@ -19,25 +14,47 @@ def test_items(set_up):
     basket = BasketHelper(set_up)
 
     main_page.go_to_site()
+    main_page.acceptCookies()
     main_page.goSearching()
     main_page.enterQuery("BJURSTA")
     main_page.clickSearchButton()
 
-    custom_wait()
+    item_one.sortingPrices()
+    item_one.getHighPrices()
+    item_one.goToHighPrices()
     item_one.getItemOne()
     item_one.addToCard()
 
-    if Pages.ItemsPageLocators.closeModal == True:
-        item_one.closeModal()
+    if Pages.ItemsPageLocators.purchaseModal == True:
+
+        item_one.closingModal()
+        main_page.goSearching()
+        main_page.enterQuery("BJURSTA")
+        main_page.clickSearchButton()
+
+        item_two.sortingPrices()
+        item_two.getHighPrices()
+        item_two.goToHighPrices()
+        item_two.getItemTwo()
+        item_two.addToCard()
+
     else:
         main_page.goSearching()
         main_page.enterQuery("BJURSTA")
         main_page.clickSearchButton()
 
+        item_two.sortingPrices()
+        item_two.getHighPrices()
+        item_two.goToHighPrices()
         item_two.getItemTwo()
         item_two.addToCard()
-        custom_wait()
 
-        custom_wait()
+    if Pages.ItemsPageLocators.purchaseModal == True:
+        item_one.closingModal()
         basket.goToBusket()
-        basket.verifyItemsInBusket()
+        assert_that(basket.verifyItemsInBusket(), True)
+
+    else:
+        basket.goToBusket()
+        assert_that(basket.verifyItemsInBusket(), True)
+
