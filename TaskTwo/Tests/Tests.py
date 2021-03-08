@@ -12,11 +12,12 @@ def test_items(set_up):
     item_one = ItemOneHelper(set_up)
     item_two = ItemTwoHelper(set_up)
     basket = BasketHelper(set_up)
+    searchedItem = "BJURSTA"
 
     main_page.go_to_site()
     main_page.acceptCookies()
     main_page.goSearching()
-    main_page.enterQuery("BJURSTA")
+    main_page.enterQuery(searchedItem)
     main_page.clickSearchButton()
 
     item_one.sortingPrices()
@@ -29,7 +30,7 @@ def test_items(set_up):
 
         item_one.closingModal()
         main_page.goSearching()
-        main_page.enterQuery("BJURSTA")
+        main_page.enterQuery(searchedItem)
         main_page.clickSearchButton()
 
         item_two.sortingPrices()
@@ -40,7 +41,7 @@ def test_items(set_up):
 
     else:
         main_page.goSearching()
-        main_page.enterQuery("BJURSTA")
+        main_page.enterQuery(searchedItem)
         main_page.clickSearchButton()
 
         item_two.sortingPrices()
